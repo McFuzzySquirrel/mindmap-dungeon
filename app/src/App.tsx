@@ -3,9 +3,12 @@ import { useState, type JSX } from "react";
 import { FoundationWorkspaceScreen } from "@ui/screens/FoundationWorkspaceScreen";
 import { CreatorDungeonScreen } from "@ui/screens/CreatorDungeonScreen";
 import { ScribeEncountersScreen } from "@ui/screens/ScribeEncountersScreen";
+import { ProgressionScreen } from "@ui/screens/ProgressionScreen";
 
 export function App(): JSX.Element {
-  const [activeScreen, setActiveScreen] = useState<"creator" | "foundation" | "scribe">(
+  const [activeScreen, setActiveScreen] = useState<
+    "creator" | "foundation" | "scribe" | "progression"
+  >(
     "creator",
   );
 
@@ -41,12 +44,22 @@ export function App(): JSX.Element {
           >
             Scribe Encounters
           </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeScreen === "progression"}
+            className={activeScreen === "progression" ? "is-active" : ""}
+            onClick={() => setActiveScreen("progression")}
+          >
+            Progression
+          </button>
         </div>
       </header>
 
       {activeScreen === "creator" ? <CreatorDungeonScreen /> : null}
       {activeScreen === "foundation" ? <FoundationWorkspaceScreen /> : null}
       {activeScreen === "scribe" ? <ScribeEncountersScreen /> : null}
+      {activeScreen === "progression" ? <ProgressionScreen /> : null}
     </div>
   );
 }

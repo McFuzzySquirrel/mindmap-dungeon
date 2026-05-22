@@ -94,6 +94,14 @@ body {
   gap: 0.9rem;
 }
 
+.progression-shell {
+  min-height: 100vh;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
 .foundation-header,
 .foundation-card {
   background: var(--panel);
@@ -118,6 +126,14 @@ body {
   box-shadow: 0 6px 20px rgba(39, 28, 12, 0.11);
 }
 
+.progression-header,
+.progression-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(39, 28, 12, 0.11);
+}
+
 .foundation-header {
   padding: 1rem 1.2rem;
 }
@@ -127,6 +143,10 @@ body {
 }
 
 .scribe-header {
+  padding: 1rem 1.2rem;
+}
+
+.progression-header {
   padding: 1rem 1.2rem;
 }
 
@@ -148,6 +168,12 @@ body {
   font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
 }
 
+.progression-header h1 {
+  margin: 0;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
+}
+
 .foundation-header p {
   margin: 0.35rem 0 0;
 }
@@ -157,6 +183,10 @@ body {
 }
 
 .scribe-header p {
+  margin: 0.35rem 0 0;
+}
+
+.progression-header p {
   margin: 0.35rem 0 0;
 }
 
@@ -181,6 +211,13 @@ body {
   gap: 0.9rem;
 }
 
+.progression-grid {
+  display: grid;
+  align-content: start;
+  grid-template-columns: repeat(2, minmax(18rem, 1fr));
+  gap: 0.9rem;
+}
+
 .foundation-card {
   padding: 1rem;
 }
@@ -190,6 +227,10 @@ body {
 }
 
 .scribe-card {
+  padding: 1rem;
+}
+
+.progression-card {
   padding: 1rem;
 }
 
@@ -207,6 +248,101 @@ body {
 .scribe-card h3,
 .scribe-card h4 {
   margin: 0;
+}
+
+.progression-card h2,
+.progression-card h3,
+.progression-card h4 {
+  margin: 0;
+}
+
+.progression-dashboard-grid {
+  margin-top: 0.65rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.progression-metric-panel {
+  border: 1px solid #9d8360;
+  border-radius: 12px;
+  padding: 0.65rem;
+  background: #fffaf2;
+}
+
+.progression-metric-panel p {
+  margin: 0.35rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.progression-metric-panel span {
+  font-size: 0.9rem;
+  color: #40362a;
+}
+
+.progression-badge-list {
+  margin: 0.65rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.progression-badge-list li {
+  display: grid;
+  gap: 0.2rem;
+  border: 1px solid #ab9678;
+  border-radius: 10px;
+  background: #fffaf1;
+  padding: 0.55rem;
+}
+
+.progression-ratio-grid {
+  margin-top: 0.65rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.progression-ratio-grid p {
+  margin: 0;
+}
+
+.progression-breakdown-surface {
+  margin-top: 0.65rem;
+  padding: 0.7rem;
+  border: 1px solid #8b7656;
+  border-radius: 10px;
+  background: #f8f1e5;
+}
+
+.progression-breakdown-surface p {
+  margin: 0.35rem 0;
+}
+
+.progression-timeline {
+  margin: 0.65rem 0 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.progression-timeline li {
+  border: 1px solid #ab9678;
+  border-radius: 10px;
+  background: #fffaf1;
+  padding: 0.55rem;
+}
+
+.progression-timeline li div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.progression-timeline li p {
+  margin: 0.3rem 0 0;
 }
 
 .foundation-card h3 {
@@ -470,6 +606,10 @@ body[data-motion="reduced"] * {
     padding: 0.8rem;
   }
 
+  .progression-shell {
+    padding: 0.8rem;
+  }
+
   .foundation-grid {
     grid-template-columns: 1fr;
   }
@@ -482,7 +622,15 @@ body[data-motion="reduced"] * {
     grid-template-columns: 1fr;
   }
 
+  .progression-grid {
+    grid-template-columns: 1fr;
+  }
+
   .creator-progress-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .progression-dashboard-grid {
     grid-template-columns: 1fr;
   }
 
@@ -504,6 +652,10 @@ body[data-motion="reduced"] * {
   }
 
   .scribe-room-list li {
+    flex-direction: column;
+  }
+
+  .progression-timeline li div {
     flex-direction: column;
   }
 }

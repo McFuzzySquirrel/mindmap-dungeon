@@ -3,8 +3,8 @@
 ## Current State
 **Mode**: Feature-Based Build
 **Product Vision**: docs/product-vision.md
-**Current Feature**: Scribe Encounters (docs/features/scribe-encounters.md)
-**Status**: Paused (Feature 3 Complete)
+**Current Feature**: Progression (docs/features/progression.md)
+**Status**: Paused (Feature 4 Complete)
 **Last Updated**: 2026-05-22
 
 ## Feature Progress
@@ -14,7 +14,7 @@
 | Foundation | docs/features/foundation.md | Complete | 2/2 |
 | Creator Dungeon | docs/features/creator-dungeon.md | Complete | 2/2 |
 | Scribe Encounters | docs/features/scribe-encounters.md | Complete | 2/2 |
-| Progression | docs/features/progression.md | Pending | 0/2 |
+| Progression | docs/features/progression.md | Complete | 2/2 |
 | Archaeologist Review | docs/features/archaeologist-review.md | Pending | 0/2 |
 
 ## Completed Tasks (Feature 1)
@@ -53,6 +53,14 @@
 - [x] Verification, Task V3: Add and run Scribe acceptance test coverage (@qa-test-engineer) [model: default]
    - Files: app/tests/unit/scribeNoteValidation.test.ts, app/tests/unit/scribeOrchestrator.test.ts, app/tests/integration/scribeEncounters.integration.test.ts
 
+## Completed Tasks (Feature 4)
+- [x] Phase 1, Task 1.1: Implement deterministic progression reward engine, badge thresholds, rank tiers, reward history contracts, and CSV export services (@progression-systems-engineer) [model: default]
+   - Files: app/src/core/progression/index.ts, app/src/core/progression/progressionEngine.ts, app/src/core/progression/types.ts, app/src/features/progression/index.ts, app/src/features/progression/progressionDomain.ts, app/src/features/progression/types.ts, app/src/services/progressExport/index.ts, app/src/services/progressExport/progressExportService.ts, app/src/services/progressExport/types.ts, app/tests/unit/progression/progressionEngine.test.ts, app/tests/unit/progression/progressionDomain.test.ts, app/tests/unit/progression/progressExportService.test.ts
+- [x] Phase 2, Task 2.1: Implement Progression dashboard UI, post-room-clear breakdown panel, reward history timeline, and CSV export action/status feedback (@ui-accessibility-engineer) [model: default]
+   - Files: app/src/ui/screens/ProgressionScreen.tsx, app/src/App.tsx, app/src/styles.css
+- [x] Verification, Task V4: Add and run Progression acceptance test coverage (@qa-test-engineer) [model: default]
+   - Files: app/tests/unit/progression/progressionEngine.test.ts, app/tests/unit/progression/progressionDomain.test.ts, app/tests/unit/progression/progressExportService.test.ts, app/tests/integration/progression.integration.test.ts
+
 ## Acceptance Criteria Status (Foundation)
 1. Create/save/reopen/import/export local subject folders: Pass
 2. Validation rejects invalid schema/enum/migration data before corruption: Pass
@@ -74,15 +82,22 @@
 4. Failing validation preserves the draft and shows specific unmet criteria: Pass
 5. Completion is idempotent and does not duplicate rewards or artifacts: Pass
 
+## Acceptance Criteria Status (Progression)
+1. XP is awarded using the defined deterministic formula: Pass
+2. Badge unlocks happen only when their thresholds are met: Pass
+3. Rank tiers and reward history are visible in the UI: Pass
+4. Progress metrics can be exported locally to CSV: Pass
+5. Reward totals match the breakdown shown to the user: Pass
+
 ## Verification Evidence
 - `npm run typecheck`: Pass
-- `npm run test`: Pass (10 files, 34 tests)
+- `npm run test`: Pass (14 files, 48 tests)
 - `npm run build`: Pass
 
 ## Blockers
 - None
 
 ## Notes
-- Feature 3 (Scribe Encounters) execution completed and paused per user request.
+- Feature 4 (Progression) execution completed and paused per user request.
 - Existing Vite browser externalization warnings for `node:*` imports remain unchanged from prior foundation architecture and are non-blocking for current acceptance criteria.
-- Follow-on features (Progression, Archaeologist Review) remain unstarted.
+- Follow-on feature Archaeologist Review remains unstarted.
