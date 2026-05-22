@@ -315,6 +315,7 @@ Error code catalog (v1, stable):
 | ID | Requirement | Priority |
 |----|-------------|----------|
 | CR-01 | System shall create a new subject dungeon with a root room initialized from user input. | Must |
+| CR-08 | System shall allow users to open/select an existing subject dungeon and resume exploration and updates. | Must |
 | CR-02 | System shall prompt for connected topics and create linked rooms from confirmed entries. | Must |
 | CR-03 | System shall support cross-links between existing rooms (graph edges beyond parent-child). | Must |
 | CR-04 | System shall prevent duplicate room IDs and preserve unique topic identity. | Must |
@@ -466,7 +467,7 @@ Error/recovery states:
 
 ### Phase 1: Creator Foundation
 - [ ] Initialize Tauri + React + Vite + TypeScript project skeleton.
-- [ ] Implement local subject/dungeon creation and root room flow.
+- [ ] Implement local subject/dungeon creation, selection, and root room flow.
 - [ ] Implement room linking and cross-link graph editing.
 - [ ] Build map traversal UI and creation progress indicators.
 - [ ] Add persistence for dungeon.json + room.json.
