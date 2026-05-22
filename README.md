@@ -4,6 +4,11 @@ A local-first desktop learning game that transforms studying into a three-phase 
 
 Built with **Tauri**, **React**, **TypeScript**, and **Vite** for a lightweight, offline-first experience.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tests Passing](https://img.shields.io/badge/tests-70%20passing-brightgreen)](app/tests)
+[![Platform Support](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-blue)](https://tauri.app/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178c6)](https://www.typescriptlang.org/)
+
 ---
 
 ## Features
