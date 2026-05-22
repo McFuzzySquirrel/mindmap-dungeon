@@ -1,6 +1,7 @@
 import type { PhaseBadgeId } from "@core/progression";
 
 import type {
+  ApplyReviewEventsToAnalyticsInput,
   BadgeUnlockTimestamps,
   BuildSubjectProgressionSummaryInput,
   PostRoomClearBreakdownPayload,
@@ -207,5 +208,39 @@ export function buildSubjectProgressionSummary(
       longestReviewStreak,
     },
     ...(lastReward ? { lastRewardAt: lastReward.occurredAt } : {}),
+  };
+}
+
+export function applyReviewEventsToAnalytics(
+  input: ApplyReviewEventsToAnalyticsInput,
+): BuildSubjectProgressionSummaryInput["reviewAnalytics"] {
+  const events = [...input.events].sort((left, right) => {
+    if (left.occurredAt === right.occurredAt) {
+      return left.eventId.localeCompare(right.eventId);
+    }
+
+    return left.occurredAt.localeCompare(right.occurredAt);
+  });
+
+  let reviewSessionCount = toNonNegativeInteger(input.reviewAnalytics.reviewSessionCount);
+  let fullReviewPasses = toNonNegativeInteger(input.reviewAnalytics.fullReviewPasses);
+  let currentReviewStreak = toNonNegativeInteger(input.reviewAnalytics.currentReviewStreak);
+  let longestReviewStreak = toNonNegativeInteger(input.reviewAnalytics.longestReviewStreak);
+
+  for (const event of events) {
+    reviewSessionCount = Math.max(reviewSessionCount, toNonNegativeInteger(event.reviewSessionCount));
+    fullReviewPasses = Math.max(fullReviewPasses, toNonNegativeInteger(event.fullReviewPasses));
+    currentReviewStreak = toNonNegativeInteger(event.currentReviewStreak);
+    longestReviewStreak = Math.max(
+      longestReviewStreak,
+      toNonNegativeInteger(event.longestReviewStreak),
+    );
+  }
+
+  return {
+    reviewSessionCount,
+    fullReviewPasses,
+    currentReviewStreak,
+    longestReviewStreak,
   };
 }

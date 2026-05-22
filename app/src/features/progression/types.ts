@@ -3,6 +3,7 @@ import type {
   RankTier,
   XpBreakdown,
 } from "@core/progression";
+import type { ReviewRoomReviewedEvent } from "@core/review";
 
 export const REWARD_HISTORY_EVENT_TYPES = [
   "ROOM_CLEAR_XP_AWARDED",
@@ -101,4 +102,9 @@ export interface BuildSubjectProgressionSummaryInput {
   rewardHistory: readonly RewardHistoryEntry[];
   completion: ProgressionCompletionSnapshot;
   reviewAnalytics: ReviewAnalyticsSnapshot;
+}
+
+export interface ApplyReviewEventsToAnalyticsInput {
+  reviewAnalytics: ReviewAnalyticsSnapshot;
+  events: readonly ReviewRoomReviewedEvent[];
 }

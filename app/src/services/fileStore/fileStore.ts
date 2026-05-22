@@ -214,6 +214,12 @@ export class FileStore {
     return readUtf8File(path.join(roomDirectory, room.notePath));
   }
 
+  async readRoomArtifact(roomId: string): Promise<string> {
+    const room = await this.loadRoom(roomId);
+    const roomDirectory = resolveRoomDirectory(this.context, roomId);
+    return readUtf8File(path.join(roomDirectory, room.artifactPath));
+  }
+
   async saveRoomArtifact(roomId: string, artifactMarkdown: string): Promise<void> {
     const room = await this.loadRoom(roomId);
     const roomDirectory = resolveRoomDirectory(this.context, roomId);

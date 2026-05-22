@@ -1,4 +1,5 @@
 export {
+  applyReviewEventsToAnalytics,
   appendRewardHistory,
   buildPostRoomClearBreakdownPayload,
   buildSubjectProgressionSummary,
@@ -6,6 +7,7 @@ export {
 } from "./progressionDomain";
 export {
   REWARD_HISTORY_EVENT_TYPES,
+  type ApplyReviewEventsToAnalyticsInput,
   type BadgeUnlockTimestamps,
   type BuildSubjectProgressionSummaryInput,
   type PostRoomClearBreakdownPayload,

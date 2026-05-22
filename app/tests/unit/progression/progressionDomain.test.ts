@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  applyReviewEventsToAnalytics,
   appendRewardHistory,
   buildPostRoomClearBreakdownPayload,
   buildSubjectProgressionSummary,
@@ -211,5 +212,49 @@ describe("progression feature contracts", () => {
 
     expect(summary.rewardHistory).toEqual([]);
     expect(summary.lastRewardAt).toBeUndefined();
+  });
+
+  it("PRG-FR-04 applies review events into analytics snapshot deterministically", () => {
+    const updated = applyReviewEventsToAnalytics({
+      reviewAnalytics: {
+        reviewSessionCount: 1,
+        fullReviewPasses: 0,
+        currentReviewStreak: 1,
+        longestReviewStreak: 1,
+      },
+      events: [
+        {
+          eventId: "subject-1:room-2:2026-05-22T10:06:00.000Z:review:2",
+          eventType: "ROOM_REVIEWED",
+          subjectId: "subject-1",
+          dungeonId: "dungeon-1",
+          roomId: "room-2",
+          occurredAt: "2026-05-22T10:06:00.000Z",
+          reviewSessionCount: 2,
+          fullReviewPasses: 1,
+          currentReviewStreak: 2,
+          longestReviewStreak: 2,
+        },
+        {
+          eventId: "subject-1:room-1:2026-05-22T10:05:00.000Z:review:1",
+          eventType: "ROOM_REVIEWED",
+          subjectId: "subject-1",
+          dungeonId: "dungeon-1",
+          roomId: "room-1",
+          occurredAt: "2026-05-22T10:05:00.000Z",
+          reviewSessionCount: 1,
+          fullReviewPasses: 0,
+          currentReviewStreak: 1,
+          longestReviewStreak: 1,
+        },
+      ],
+    });
+
+    expect(updated).toEqual({
+      reviewSessionCount: 2,
+      fullReviewPasses: 1,
+      currentReviewStreak: 2,
+      longestReviewStreak: 2,
+    });
   });
 });
