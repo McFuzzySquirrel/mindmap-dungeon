@@ -241,4 +241,100 @@ describe("archaeologist orchestrator", () => {
     expect(persisted.rooms["room-2"]?.reviewPassCount).toBe(1);
     expect(persisted.dungeon.phaseState).toBe("ArchaeologistActive");
   });
+
+  it("ARC-FR-02 returns ROOM_NOT_REVIEWABLE when room exists but was not cleared", async () => {
+    const roomOne = buildRoom({
+      roomId: "room-1",
+      topic: "Limits",
+      state: "EncounterDefeated",
+      finalPass: true,
+    });
+    const roomTwo = buildRoom({
+      roomId: "room-2",
+      topic: "Derivatives",
+      state: "NotesDrafted",      // Not cleared
+      finalPass: false,
+    });
+
+    // Use ratio 0.5 so review unlocks with just room-1 complete
+    const fixture = createMemoryPersistence(buildSnapshot({ rooms: [roomOne, roomTwo] }));
+    const orchestrator = createArchaeologistOrchestrator({
+      persistence: fixture.persistence,
+      requiredCompletionRatio: 0.5,
+    });
+
+    await orchestrator.startSession("2026-05-22T16:30:00.000Z");
+
+    const result = await orchestrator.reviewRoom({
+      roomId: "room-2",       // room-2 is not in traversal (not cleared)
+      nowIso: "2026-05-22T16:31:00.000Z",
+    });
+
+    expect(result.ok).toBe(false);
+    if (result.ok) {
+      return;
+    }
+    expect(result.error.code).toBe("ROOM_NOT_REVIEWABLE");
+  });
+
+  it("ARC-FR-04 repeated reviews of the same room increment reviewPassCount each time", async () => {
+    const roomOne = buildRoom({
+      roomId: "room-1",
+      topic: "Limits",
+      state: "EncounterDefeated",
+      finalPass: true,
+    });
+
+    const fixture = createMemoryPersistence(buildSnapshot({ rooms: [roomOne] }));
+    const orchestrator = createArchaeologistOrchestrator({
+      persistence: fixture.persistence,
+      requiredCompletionRatio: 1,
+    });
+
+    await orchestrator.startSession("2026-05-22T17:00:00.000Z");
+
+    const r1 = await orchestrator.reviewRoom({ roomId: "room-1", nowIso: "2026-05-22T17:01:00.000Z" });
+    expect(r1.ok).toBe(true);
+    if (!r1.ok) return;
+    expect(r1.value.room.reviewPassCount).toBe(1);
+
+    const r2 = await orchestrator.reviewRoom({ roomId: "room-1", nowIso: "2026-05-22T17:02:00.000Z" });
+    expect(r2.ok).toBe(true);
+    if (!r2.ok) return;
+    expect(r2.value.room.reviewPassCount).toBe(2);
+
+    const r3 = await orchestrator.reviewRoom({ roomId: "room-1", nowIso: "2026-05-22T17:03:00.000Z" });
+    expect(r3.ok).toBe(true);
+    if (!r3.ok) return;
+    expect(r3.value.room.reviewPassCount).toBe(3);
+
+    // Persisted count should match
+    const persisted = fixture.getSnapshot();
+    expect(persisted.rooms["room-1"]?.reviewPassCount).toBe(3);
+  });
+
+  it("ARC-FR-01 NeedsRevalidation room with finalPass=true counts toward unlock threshold", async () => {
+    const roomOne = buildRoom({
+      roomId: "room-1",
+      topic: "Limits",
+      state: "NeedsRevalidation",  // Qualifies as reviewable state
+      finalPass: true,
+    });
+
+    const fixture = createMemoryPersistence(
+      buildSnapshot({ rooms: [roomOne], phaseState: "ScribeComplete" }),
+    );
+    const orchestrator = createArchaeologistOrchestrator({
+      persistence: fixture.persistence,
+      requiredCompletionRatio: 1,
+    });
+
+    const startResult = await orchestrator.startSession("2026-05-22T17:10:00.000Z");
+    expect(startResult.ok).toBe(true);
+    if (!startResult.ok) {
+      return;
+    }
+    expect(startResult.value.unlock.unlocked).toBe(true);
+    expect(startResult.value.traversal.orderedRoomIds).toContain("room-1");
+  });
 });
