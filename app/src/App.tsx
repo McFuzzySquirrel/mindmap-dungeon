@@ -2,9 +2,12 @@ import { useState, type JSX } from "react";
 
 import { FoundationWorkspaceScreen } from "@ui/screens/FoundationWorkspaceScreen";
 import { CreatorDungeonScreen } from "@ui/screens/CreatorDungeonScreen";
+import { ScribeEncountersScreen } from "@ui/screens/ScribeEncountersScreen";
 
 export function App(): JSX.Element {
-  const [activeScreen, setActiveScreen] = useState<"creator" | "foundation">("creator");
+  const [activeScreen, setActiveScreen] = useState<"creator" | "foundation" | "scribe">(
+    "creator",
+  );
 
   return (
     <div className="app-shell">
@@ -29,10 +32,21 @@ export function App(): JSX.Element {
           >
             Foundation Workspace
           </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeScreen === "scribe"}
+            className={activeScreen === "scribe" ? "is-active" : ""}
+            onClick={() => setActiveScreen("scribe")}
+          >
+            Scribe Encounters
+          </button>
         </div>
       </header>
 
-      {activeScreen === "creator" ? <CreatorDungeonScreen /> : <FoundationWorkspaceScreen />}
+      {activeScreen === "creator" ? <CreatorDungeonScreen /> : null}
+      {activeScreen === "foundation" ? <FoundationWorkspaceScreen /> : null}
+      {activeScreen === "scribe" ? <ScribeEncountersScreen /> : null}
     </div>
   );
 }

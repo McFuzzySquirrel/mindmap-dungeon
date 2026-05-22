@@ -3,8 +3,8 @@
 ## Current State
 **Mode**: Feature-Based Build
 **Product Vision**: docs/product-vision.md
-**Current Feature**: Creator Dungeon (docs/features/creator-dungeon.md)
-**Status**: Paused (Feature 2 Complete)
+**Current Feature**: Scribe Encounters (docs/features/scribe-encounters.md)
+**Status**: Paused (Feature 3 Complete)
 **Last Updated**: 2026-05-22
 
 ## Feature Progress
@@ -13,7 +13,7 @@
 |---------|------|--------|-----------------|
 | Foundation | docs/features/foundation.md | Complete | 2/2 |
 | Creator Dungeon | docs/features/creator-dungeon.md | Complete | 2/2 |
-| Scribe Encounters | docs/features/scribe-encounters.md | Pending | 0/2 |
+| Scribe Encounters | docs/features/scribe-encounters.md | Complete | 2/2 |
 | Progression | docs/features/progression.md | Pending | 0/2 |
 | Archaeologist Review | docs/features/archaeologist-review.md | Pending | 0/2 |
 
@@ -45,6 +45,14 @@
 - [x] Verification, Task V2: Add and run Creator acceptance test coverage (@qa-test-engineer) [model: default]
    - Files: app/tests/unit/creatorDomain.test.ts, app/tests/integration/creatorDungeon.integration.test.ts
 
+## Completed Tasks (Feature 3)
+- [x] Phase 1, Task 1.1: Implement encounter lifecycle orchestration, deterministic note gate, rubric scoring, artifact generation, and persistence adapter (@scribe-encounters-engineer) [model: default]
+   - Files: app/src/features/scribe/types.ts, app/src/features/scribe/scribeDomain.ts, app/src/features/scribe/index.ts, app/src/core/validation/notes/types.ts, app/src/core/validation/notes/noteValidation.ts, app/src/core/validation/notes/index.ts, app/src/core/artifacts/types.ts, app/src/core/artifacts/artifactGenerator.ts, app/src/core/artifacts/index.ts
+- [x] Phase 2, Task 2.1: Implement Scribe encounter UI for note editing, validation feedback, retry flow, manual confirmation, and post-clear revision (@ui-accessibility-engineer) [model: default]
+   - Files: app/src/ui/screens/ScribeEncountersScreen.tsx, app/src/App.tsx, app/src/styles.css
+- [x] Verification, Task V3: Add and run Scribe acceptance test coverage (@qa-test-engineer) [model: default]
+   - Files: app/tests/unit/scribeNoteValidation.test.ts, app/tests/unit/scribeOrchestrator.test.ts, app/tests/integration/scribeEncounters.integration.test.ts
+
 ## Acceptance Criteria Status (Foundation)
 1. Create/save/reopen/import/export local subject folders: Pass
 2. Validation rejects invalid schema/enum/migration data before corruption: Pass
@@ -59,15 +67,22 @@
 4. Existing subjects can be reopened and resumed without losing graph state: Pass
 5. Post-Scribe graph edits correctly trigger revalidation on impacted rooms: Pass
 
+## Acceptance Criteria Status (Scribe Encounters)
+1. Each room spawns an encounter that requires note submission: Pass
+2. Notes must satisfy the configured gate before the room is cleared: Pass
+3. Passing a room generates a collectible artifact: Pass
+4. Failing validation preserves the draft and shows specific unmet criteria: Pass
+5. Completion is idempotent and does not duplicate rewards or artifacts: Pass
+
 ## Verification Evidence
 - `npm run typecheck`: Pass
-- `npm run test`: Pass (7 files, 25 tests)
+- `npm run test`: Pass (10 files, 34 tests)
 - `npm run build`: Pass
 
 ## Blockers
 - None
 
 ## Notes
-- Feature 1 and Feature 2 execution completed; paused per user request after Feature 2.
-- No new technologies were introduced in Feature 2; existing baseline stack remains unchanged.
-- Follow-on features (Scribe Encounters, Progression, Archaeologist Review) remain unstarted.
+- Feature 3 (Scribe Encounters) execution completed and paused per user request.
+- Existing Vite browser externalization warnings for `node:*` imports remain unchanged from prior foundation architecture and are non-blocking for current acceptance criteria.
+- Follow-on features (Progression, Archaeologist Review) remain unstarted.

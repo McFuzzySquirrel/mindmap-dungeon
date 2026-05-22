@@ -86,6 +86,14 @@ body {
   gap: 0.9rem;
 }
 
+.scribe-shell {
+  min-height: 100vh;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
 .foundation-header,
 .foundation-card {
   background: var(--panel);
@@ -102,11 +110,23 @@ body {
   box-shadow: 0 6px 20px rgba(39, 28, 12, 0.11);
 }
 
+.scribe-header,
+.scribe-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(39, 28, 12, 0.11);
+}
+
 .foundation-header {
   padding: 1rem 1.2rem;
 }
 
 .creator-header {
+  padding: 1rem 1.2rem;
+}
+
+.scribe-header {
   padding: 1rem 1.2rem;
 }
 
@@ -122,11 +142,21 @@ body {
   font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
 }
 
+.scribe-header h1 {
+  margin: 0;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
+}
+
 .foundation-header p {
   margin: 0.35rem 0 0;
 }
 
 .creator-header p {
+  margin: 0.35rem 0 0;
+}
+
+.scribe-header p {
   margin: 0.35rem 0 0;
 }
 
@@ -144,11 +174,22 @@ body {
   gap: 0.9rem;
 }
 
+.scribe-grid {
+  display: grid;
+  align-content: start;
+  grid-template-columns: repeat(2, minmax(18rem, 1fr));
+  gap: 0.9rem;
+}
+
 .foundation-card {
   padding: 1rem;
 }
 
 .creator-card {
+  padding: 1rem;
+}
+
+.scribe-card {
   padding: 1rem;
 }
 
@@ -159,6 +200,12 @@ body {
 
 .creator-card h2,
 .creator-card h3 {
+  margin: 0;
+}
+
+.scribe-card h2,
+.scribe-card h3,
+.scribe-card h4 {
   margin: 0;
 }
 
@@ -201,6 +248,51 @@ body {
   border-radius: 10px;
   border: 1px solid #ab9678;
   background: #fffaf1;
+}
+
+.scribe-room-list,
+.scribe-feedback-list {
+  margin: 0.65rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.scribe-room-list li,
+.scribe-feedback-list li {
+  padding: 0.55rem;
+  border-radius: 10px;
+  border: 1px solid #ab9678;
+  background: #fffaf1;
+}
+
+.scribe-room-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+  align-items: flex-start;
+}
+
+.scribe-room-list li p {
+  margin: 0.3rem 0 0;
+}
+
+.scribe-room-list li.is-selected {
+  border-color: #2f5f5e;
+  box-shadow: 0 0 0 2px rgba(47, 95, 94, 0.2);
+}
+
+.scribe-requirements {
+  margin-top: 0.65rem;
+  padding: 0.7rem;
+  border: 1px solid #8b7656;
+  border-radius: 10px;
+  background: #f8f1e5;
+}
+
+.scribe-requirements p {
+  margin: 0.35rem 0;
 }
 
 textarea {
@@ -374,11 +466,19 @@ body[data-motion="reduced"] * {
     padding: 0.8rem;
   }
 
+  .scribe-shell {
+    padding: 0.8rem;
+  }
+
   .foundation-grid {
     grid-template-columns: 1fr;
   }
 
   .creator-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scribe-grid {
     grid-template-columns: 1fr;
   }
 
@@ -401,5 +501,9 @@ body[data-motion="reduced"] * {
   .creator-list li {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .scribe-room-list li {
+    flex-direction: column;
   }
 }
