@@ -1,0 +1,9 @@
+export const DUNGEON_DATA_DIRECTORY = "dungeon-data";
+export const DUNGEON_FILE_NAME = "dungeon.json";
+export const ROOMS_DIRECTORY_NAME = "rooms";
+export const ROOM_FILE_NAME = "room.json";
+export const ROOM_NOTE_FILE_NAME = "notes.txt";
+export const ROOM_ARTIFACT_FILE_NAME = "artifact.md";
+export const ATTACHMENTS_DIRECTORY_NAME = "attachments";
+export const BACKUPS_DIRECTORY_NAME = ".backups";
+export const MAX_BACKUP_SNAPSHOTS = 5;

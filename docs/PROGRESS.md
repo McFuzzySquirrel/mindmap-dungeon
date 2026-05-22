@@ -1,105 +1,55 @@
 # Project Progress
 
 ## Current State
-**Mode**: Feature-Based Build Planning
+**Mode**: Feature-Based Build
 **Product Vision**: docs/product-vision.md
-**Status**: Planning Complete (No implementation started)
+**Current Feature**: Foundation (docs/features/foundation.md)
+**Status**: Paused (Feature 1 Complete)
 **Last Updated**: 2026-05-22
 
-## Inputs Analyzed
-- docs/product-vision.md
-- docs/features/foundation.md
-- docs/features/creator-dungeon.md
-- docs/features/scribe-encounters.md
-- docs/features/progression.md
-- docs/features/archaeologist-review.md
+## Feature Progress
 
-## Feature Dependency Graph (Normalized)
+| Feature | File | Status | Phases Complete |
+|---------|------|--------|-----------------|
+| Foundation | docs/features/foundation.md | Complete | 2/2 |
+| Creator Dungeon | docs/features/creator-dungeon.md | Pending | 0/2 |
+| Scribe Encounters | docs/features/scribe-encounters.md | Pending | 0/2 |
+| Progression | docs/features/progression.md | Pending | 0/2 |
+| Archaeologist Review | docs/features/archaeologist-review.md | Pending | 0/2 |
 
-### Declared dependencies by feature
-- Foundation: None
-- Creator Dungeon: Foundation
-- Scribe Encounters: Foundation, Creator Dungeon
-- Progression: Foundation, Scribe Encounters
-- Archaeologist Review: Foundation, Creator Dungeon, Scribe Encounters, Progression
+## Completed Tasks (Feature 1)
+- [x] Phase 1, Task 1.1: Scaffold app workspace, architecture boundaries, and runtime baseline (@project-architect) [model: default]
+   - Files: .nvmrc, app/package.json, app/tsconfig.base.json, app/vite.config.ts, app/src/main.tsx, app/src/App.tsx, app/src/styles.css, app/src-tauri/*, docs/architecture/platform-baseline.md, docs/architecture/workspace-setup.md
+- [x] Phase 1, Task 1.2: Implement local filesystem persistence, ULIDs, and import/export plumbing (@foundation-data-engineer) [model: default]
+   - Files: app/src/services/fileStore/*, app/src/services/importExport/*, app/src/core/validation/persistence/*, app/src/core/error-catalog/*, app/src/services/settings/*
+- [x] Phase 2, Task 2.1: Implement schema/integrity validation and stable persistence error contracts (@foundation-data-engineer) [model: default]
+   - Files: app/src/core/validation/persistence/validators.ts, app/src/core/error-catalog/persistenceErrors.ts
+- [x] Phase 2, Task 2.2: Add backup snapshots with retention of latest five (@foundation-data-engineer) [model: default]
+   - Files: app/src/services/fileStore/backups/backupService.ts, app/src/services/fileStore/fileStore.ts
+- [x] Phase 2, Task 2.3: Implement migration pre-backup and rollback restore flow (@foundation-data-engineer) [model: default]
+   - Files: app/src/services/fileStore/migrations/migrationRunner.ts, app/src/services/fileStore/fileStore.ts
+- [x] Phase 2, Task 2.4: Wire persisted personalization settings storage (@foundation-data-engineer) [model: default]
+   - Files: app/src/services/settings/settingsStore.ts, app/src/services/settings/index.ts
+- [x] Phase 2, Task 2.5: Implement Foundation UI surfaces (project picker/import-export/settings/actionable warnings) (@ui-accessibility-engineer) [model: default]
+   - Files: app/src/ui/screens/FoundationWorkspaceScreen.tsx, app/src/ui/screens/foundationWarnings.ts, app/src/App.tsx, app/src/styles.css
+- [x] Verification, Task V1: Add and run Foundation acceptance test coverage (@qa-test-engineer) [model: default]
+   - Files: app/tests/integration/foundationPersistence.integration.test.ts, app/tests/unit/persistenceErrorCodes.test.ts, app/tests/unit/foundationWarnings.test.ts, app/tests/unit/persistenceValidation.test.ts, app/tests/unit/backupRetention.test.ts
 
-### Topological graph
-```text
-Foundation
-  -> Creator Dungeon
-     -> Scribe Encounters
-        -> Progression
-           -> Archaeologist Review
-```
+## Acceptance Criteria Status (Foundation)
+1. Create/save/reopen/import/export local subject folders: Pass
+2. Validation rejects invalid schema/enum/migration data before corruption: Pass
+3. Automatic backups retained to latest five snapshots: Pass
+4. Attachments preserved across load/save and import/export: Pass
+5. Personalization settings can be changed and persisted locally: Pass
 
-## Dependency Validation
-- Graph type: Directed acyclic graph (DAG)
-- Circular dependencies: None detected
-- Parallelizable features: None at feature level (all later features depend on prior outputs directly or transitively)
+## Verification Evidence
+- `npm run typecheck`: Pass
+- `npm run test`: Pass (5 files, 17 tests)
+- `npm run build`: Pass
 
-## Execution Plan
-
-### 1) Foundation (first)
-**Why first**:
-- Has no dependencies.
-- Provides filesystem persistence, schema validation, import/export, backup, and migration primitives required by all other features.
-
-**Key outputs needed by downstream features**:
-- Subject/room storage model and persistence APIs.
-- Validation and error-code contracts.
-- Safe write/backup/migration behavior.
-
----
-
-### 2) Creator Dungeon (after Foundation)
-**Why second**:
-- Declares dependency on Foundation.
-- Requires persisted dungeon/room data model and validation safeguards from Foundation.
-
-**Key outputs needed by downstream features**:
-- Room graph creation and traversal states.
-- Cross-link and revalidation state transitions.
-
----
-
-### 3) Scribe Encounters (after Creator Dungeon)
-**Why third**:
-- Declares dependencies on Foundation and Creator Dungeon.
-- Needs stable room graph and room lifecycle states to spawn one encounter per room.
-
-**Key outputs needed by downstream features**:
-- Encounter completion states and generated artifacts.
-- Deterministic validation and quality-bonus output for progression hooks.
-
----
-
-### 4) Progression (after Scribe Encounters)
-**Why fourth**:
-- Declares dependencies on Foundation and Scribe Encounters.
-- Requires encounter outcomes and quality-bonus signals to award deterministic XP/badges/ranks.
-
-**Key outputs needed by downstream features**:
-- XP totals, badge states, reward history, and progress export pathways.
-
----
-
-### 5) Archaeologist Review (after Progression)
-**Why fifth**:
-- Declares dependencies on Foundation, Creator Dungeon, Scribe Encounters, and Progression.
-- Requires completed-room artifacts (from Scribe), map traversal context (from Creator), and review/progression event integration (with Progression).
-
-**Key outputs expected at completion**:
-- Review traversal over cleared rooms.
-- Artifact rendering with local attachments.
-- Self-check prompts and review-count/streak tracking integrated with progression analytics.
-
-## Build Order Summary
-1. Foundation
-2. Creator Dungeon
-3. Scribe Encounters
-4. Progression
-5. Archaeologist Review
+## Blockers
+- None
 
 ## Notes
-- The normalized graph above follows explicit dependency declarations in each feature document and the Product Vision feature dependency table.
-- No code or implementation tasks have been executed yet.
+- Feature 1 execution completed and paused per user request.
+- Follow-on features remain unstarted and depend on this completed foundation baseline.
