@@ -31,7 +31,54 @@ body {
   min-height: 100vh;
 }
 
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-phase-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  padding: 0.8rem 1.2rem;
+  background: rgba(247, 238, 221, 0.95);
+  border-bottom: 1px solid #9a825d;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.app-phase-nav h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.app-phase-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.app-phase-actions button {
+  background: #77563a;
+  border-color: #77563a;
+}
+
+.app-phase-actions button.is-active {
+  background: #2f5f5e;
+  border-color: #2f5f5e;
+}
+
 .foundation-shell {
+  min-height: 100vh;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.creator-shell {
   min-height: 100vh;
   padding: 1.2rem;
   display: flex;
@@ -47,7 +94,19 @@ body {
   box-shadow: 0 6px 20px rgba(39, 28, 12, 0.11);
 }
 
+.creator-header,
+.creator-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(39, 28, 12, 0.11);
+}
+
 .foundation-header {
+  padding: 1rem 1.2rem;
+}
+
+.creator-header {
   padding: 1rem 1.2rem;
 }
 
@@ -57,7 +116,17 @@ body {
   font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
 }
 
+.creator-header h1 {
+  margin: 0;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
+}
+
 .foundation-header p {
+  margin: 0.35rem 0 0;
+}
+
+.creator-header p {
   margin: 0.35rem 0 0;
 }
 
@@ -68,7 +137,18 @@ body {
   gap: 0.9rem;
 }
 
+.creator-grid {
+  display: grid;
+  align-content: start;
+  grid-template-columns: repeat(2, minmax(18rem, 1fr));
+  gap: 0.9rem;
+}
+
 .foundation-card {
+  padding: 1rem;
+}
+
+.creator-card {
   padding: 1rem;
 }
 
@@ -77,9 +157,104 @@ body {
   margin: 0;
 }
 
+.creator-card h2,
+.creator-card h3 {
+  margin: 0;
+}
+
 .foundation-card h3 {
   font-size: 1rem;
   color: #3f2d1d;
+}
+
+.creator-card h3 {
+  font-size: 1rem;
+  color: #3f2d1d;
+}
+
+.creator-room-surface {
+  margin-top: 0.65rem;
+  padding: 0.7rem;
+  border: 1px solid #8b7656;
+  border-radius: 10px;
+  background: #f8f1e5;
+}
+
+.creator-room-surface p {
+  margin: 0.35rem 0 0;
+}
+
+.creator-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.creator-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem;
+  border-radius: 10px;
+  border: 1px solid #ab9678;
+  background: #fffaf1;
+}
+
+textarea {
+  font: inherit;
+  border-radius: 10px;
+  border: 1px solid #8f7f66;
+  padding: 0.45rem 0.6rem;
+  background: #fffdfa;
+  color: #1c1b17;
+  resize: vertical;
+}
+
+.creator-progress-grid {
+  margin-top: 0.65rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.creator-progress-panel {
+  border: 1px solid #9d8360;
+  border-radius: 12px;
+  padding: 0.65rem;
+  background: #fffaf2;
+}
+
+.creator-progress-panel p {
+  margin: 0.35rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.creator-tag-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.creator-tag-list li {
+  font-size: 0.86rem;
+  border: 1px solid #c5b092;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  background: #f9efe0;
+}
+
+.creator-confirm-row {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
 }
 
 .field-grid {
@@ -168,7 +343,8 @@ button:disabled {
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
-select:focus-visible {
+select:focus-visible,
+textarea:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
@@ -194,7 +370,36 @@ body[data-motion="reduced"] * {
     padding: 0.8rem;
   }
 
+  .creator-shell {
+    padding: 0.8rem;
+  }
+
   .foundation-grid {
     grid-template-columns: 1fr;
+  }
+
+  .creator-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .creator-progress-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-phase-nav {
+    padding: 0.75rem 0.8rem;
+  }
+
+  .app-phase-actions {
+    width: 100%;
+  }
+
+  .app-phase-actions button {
+    flex: 1;
+  }
+
+  .creator-list li {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
