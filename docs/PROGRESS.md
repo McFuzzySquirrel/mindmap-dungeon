@@ -3,8 +3,8 @@
 ## Current State
 **Mode**: Feature-Based Build
 **Product Vision**: docs/product-vision.md
-**Current Feature**: Progression (docs/features/progression.md)
-**Status**: Paused (Feature 4 Complete)
+**Current Feature**: Archaeologist Review (docs/features/archaeologist-review.md)
+**Status**: Complete (Feature 5 Complete)
 **Last Updated**: 2026-05-22
 
 ## Feature Progress
@@ -15,7 +15,7 @@
 | Creator Dungeon | docs/features/creator-dungeon.md | Complete | 2/2 |
 | Scribe Encounters | docs/features/scribe-encounters.md | Complete | 2/2 |
 | Progression | docs/features/progression.md | Complete | 2/2 |
-| Archaeologist Review | docs/features/archaeologist-review.md | Pending | 0/2 |
+| Archaeologist Review | docs/features/archaeologist-review.md | Complete | 2/2 |
 
 ## Completed Tasks (Feature 1)
 - [x] Phase 1, Task 1.1: Scaffold app workspace, architecture boundaries, and runtime baseline (@project-architect) [model: default]
@@ -89,15 +89,30 @@
 4. Progress metrics can be exported locally to CSV: Pass
 5. Reward totals match the breakdown shown to the user: Pass
 
+## Completed Tasks (Feature 5)
+- [x] Phase 1, Task 1.1: Implement review-mode unlock gating, completed-room traversal, artifact presentation contracts, and progression review-event handoff (@archaeologist-review-engineer) [model: default]
+   - Files: app/src/core/review/types.ts, app/src/core/review/reviewDomain.ts, app/src/core/review/index.ts, app/src/features/archaeologist/types.ts, app/src/features/archaeologist/archaeologistDomain.ts, app/src/features/archaeologist/index.ts, app/src/features/progression/types.ts, app/src/features/progression/progressionDomain.ts, app/src/features/progression/index.ts, app/src/services/fileStore/fileStore.ts, app/tests/unit/reviewDomain.test.ts, app/tests/unit/archaeologistDomain.test.ts, app/tests/unit/progression/progressionDomain.test.ts
+- [x] Phase 2, Task 2.1: Implement Archaeologist review UI map/traversal, artifact reader, prompt panel, and review metric indicators (@ui-accessibility-engineer) [model: default]
+   - Files: app/src/ui/screens/ArchaeologistReviewScreen.tsx, app/src/App.tsx, app/src/styles.css
+- [x] Verification, Task V5: Add ARC unit/integration coverage and execute full quality gates (@qa-test-engineer) [model: default]
+   - Files: app/tests/integration/archaeologistReview.integration.test.ts, app/tests/unit/reviewDomain.test.ts, app/tests/unit/archaeologistDomain.test.ts
+
+## Acceptance Criteria Status (Archaeologist Review)
+1. Review mode unlocks only after Scribe completion requirements are met: Pass
+2. The user can traverse completed rooms and open artifacts: Pass
+3. Self-check prompts are generated from local room metadata and note headings: Pass
+4. Linked attachments can be viewed or opened from review mode: Pass
+5. Review counts or streaks are tracked for later progress reporting: Pass
+
 ## Verification Evidence
 - `npm run typecheck`: Pass
-- `npm run test`: Pass (14 files, 48 tests)
+- `npm run test`: Pass (17 files, 70 tests)
 - `npm run build`: Pass
 
 ## Blockers
 - None
 
 ## Notes
-- Feature 4 (Progression) execution completed and paused per user request.
+- Feature 5 (Archaeologist Review) execution completed as requested.
+- All five feature documents are now complete.
 - Existing Vite browser externalization warnings for `node:*` imports remain unchanged from prior foundation architecture and are non-blocking for current acceptance criteria.
-- Follow-on feature Archaeologist Review remains unstarted.

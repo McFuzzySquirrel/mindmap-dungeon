@@ -4,10 +4,11 @@ import { FoundationWorkspaceScreen } from "@ui/screens/FoundationWorkspaceScreen
 import { CreatorDungeonScreen } from "@ui/screens/CreatorDungeonScreen";
 import { ScribeEncountersScreen } from "@ui/screens/ScribeEncountersScreen";
 import { ProgressionScreen } from "@ui/screens/ProgressionScreen";
+import { ArchaeologistReviewScreen } from "@ui/screens/ArchaeologistReviewScreen";
 
 export function App(): JSX.Element {
   const [activeScreen, setActiveScreen] = useState<
-    "creator" | "foundation" | "scribe" | "progression"
+    "creator" | "foundation" | "scribe" | "progression" | "archaeologist"
   >(
     "creator",
   );
@@ -53,6 +54,15 @@ export function App(): JSX.Element {
           >
             Progression
           </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeScreen === "archaeologist"}
+            className={activeScreen === "archaeologist" ? "is-active" : ""}
+            onClick={() => setActiveScreen("archaeologist")}
+          >
+            Archaeologist Review
+          </button>
         </div>
       </header>
 
@@ -60,6 +70,7 @@ export function App(): JSX.Element {
       {activeScreen === "foundation" ? <FoundationWorkspaceScreen /> : null}
       {activeScreen === "scribe" ? <ScribeEncountersScreen /> : null}
       {activeScreen === "progression" ? <ProgressionScreen /> : null}
+      {activeScreen === "archaeologist" ? <ArchaeologistReviewScreen /> : null}
     </div>
   );
 }

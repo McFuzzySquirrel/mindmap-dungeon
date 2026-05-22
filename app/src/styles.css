@@ -102,6 +102,14 @@ body {
   gap: 0.9rem;
 }
 
+.archaeologist-shell {
+  min-height: 100vh;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
 .foundation-header,
 .foundation-card {
   background: var(--panel);
@@ -134,6 +142,14 @@ body {
   box-shadow: 0 6px 20px rgba(39, 28, 12, 0.11);
 }
 
+.archaeologist-header,
+.archaeologist-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(39, 28, 12, 0.11);
+}
+
 .foundation-header {
   padding: 1rem 1.2rem;
 }
@@ -147,6 +163,10 @@ body {
 }
 
 .progression-header {
+  padding: 1rem 1.2rem;
+}
+
+.archaeologist-header {
   padding: 1rem 1.2rem;
 }
 
@@ -174,6 +194,12 @@ body {
   font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
 }
 
+.archaeologist-header h1 {
+  margin: 0;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
+}
+
 .foundation-header p {
   margin: 0.35rem 0 0;
 }
@@ -187,6 +213,10 @@ body {
 }
 
 .progression-header p {
+  margin: 0.35rem 0 0;
+}
+
+.archaeologist-header p {
   margin: 0.35rem 0 0;
 }
 
@@ -218,6 +248,13 @@ body {
   gap: 0.9rem;
 }
 
+.archaeologist-grid {
+  display: grid;
+  align-content: start;
+  grid-template-columns: repeat(2, minmax(18rem, 1fr));
+  gap: 0.9rem;
+}
+
 .foundation-card {
   padding: 1rem;
 }
@@ -231,6 +268,10 @@ body {
 }
 
 .progression-card {
+  padding: 1rem;
+}
+
+.archaeologist-card {
   padding: 1rem;
 }
 
@@ -254,6 +295,111 @@ body {
 .progression-card h3,
 .progression-card h4 {
   margin: 0;
+}
+
+.archaeologist-card h2,
+.archaeologist-card h3,
+.archaeologist-card h4 {
+  margin: 0;
+}
+
+.archaeologist-unlock-surface,
+.archaeologist-room-surface {
+  margin-top: 0.65rem;
+  padding: 0.7rem;
+  border: 1px solid #8b7656;
+  border-radius: 10px;
+  background: #f8f1e5;
+}
+
+.archaeologist-unlock-surface p,
+.archaeologist-room-surface p {
+  margin: 0.35rem 0;
+}
+
+.archaeologist-metric-grid {
+  margin: 0.65rem 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.archaeologist-metric-panel {
+  border: 1px solid #9d8360;
+  border-radius: 12px;
+  padding: 0.65rem;
+  background: #fffaf2;
+}
+
+.archaeologist-metric-panel p {
+  margin: 0.35rem 0 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.archaeologist-markdown {
+  margin-top: 0.65rem;
+  border: 1px solid #8b7656;
+  border-radius: 10px;
+  background: #fffaf1;
+  padding: 0.85rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.archaeologist-markdown h3,
+.archaeologist-markdown h4,
+.archaeologist-markdown p,
+.archaeologist-markdown ul {
+  margin: 0;
+}
+
+.archaeologist-markdown ul {
+  padding-left: 1.2rem;
+}
+
+.archaeologist-links {
+  margin-top: 0.65rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.archaeologist-links ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.archaeologist-links li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.archaeologist-links li em {
+  color: #4f4436;
+  font-size: 0.9rem;
+}
+
+.archaeologist-link-unresolved {
+  color: #7c2816;
+  font-weight: 650;
+}
+
+.archaeologist-prompt-list {
+  margin: 0.7rem 0 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.archaeologist-prompt-list li {
+  border: 1px solid #ab9678;
+  border-radius: 10px;
+  background: #fffaf1;
+  padding: 0.5rem;
 }
 
 .progression-dashboard-grid {
@@ -610,6 +756,10 @@ body[data-motion="reduced"] * {
     padding: 0.8rem;
   }
 
+  .archaeologist-shell {
+    padding: 0.8rem;
+  }
+
   .foundation-grid {
     grid-template-columns: 1fr;
   }
@@ -626,11 +776,19 @@ body[data-motion="reduced"] * {
     grid-template-columns: 1fr;
   }
 
+  .archaeologist-grid {
+    grid-template-columns: 1fr;
+  }
+
   .creator-progress-grid {
     grid-template-columns: 1fr;
   }
 
   .progression-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .archaeologist-metric-grid {
     grid-template-columns: 1fr;
   }
 
