@@ -15,6 +15,7 @@
 |---------|------|--------|---------|
 | 1.0 | 2026-05-21 | GitHub Copilot | Initial PRD |
 | 1.1 | 2026-05-21 | GitHub Copilot | Gameplay balance pass: explicit note gate, XP model, badge thresholds |
+| 1.2 | 2026-05-22 | GitHub Copilot | Gap review pass: component-level acceptance coverage and doc hygiene |
 
 Track document revisions so readers know what changed and when.
 
@@ -547,6 +548,16 @@ v1 analytics export:
 ---
 
 ## 17. Acceptance Criteria
+
+### 17.1 Component Coverage
+
+| Major Component | Acceptance Criteria Summary |
+|-----------------|-----------------------------|
+| Creator | User can create a dungeon, add linked rooms, add cross-links, reopen an existing subject, and persist graph state locally. |
+| Scribe | Every room requires a passing note gate, generates an artifact on success, awards deterministic XP, and supports retries on failure. |
+| Archaeologist | User can unlock review mode, traverse cleared rooms, read artifacts, render attachments, and use template-generated self-check prompts. |
+| Data / Migration | Schema validation, ULID generation, backups, error codes, enum enforcement, and forward-only migrations work without corrupting data. |
+| Cross-cutting | App runs offline, preserves privacy, maintains atomic writes, and supports the stated cross-platform targets. |
 
 1. User can create and persist a subject dungeon locally with graph links and cross-links.
 2. Creator phase supports iterative room-topic expansion from NPC-guided prompts.
